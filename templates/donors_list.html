@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matching Donors</title>
+</head>
+<body>
+    <h2>Available Donors</h2>
+
+    <p>City: <b>{{ city }}</b></p>
+    <p>Blood Group: <b>{{ blood_group }}</b></p>
+
+    {% if donors %}
+        <ul>
+            {% for d in donors %}
+                <li>
+                    <b>Blood Group:</b> {{ d.blood_group }} |
+                    <b>City:</b> {{ d.city }} |
+                    <b>Phone:</b> {{ d.phone }} |
+                    <b>Last Donation:</b> {{ d.last_donation }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No donors found currently. Try again later.</p>
+    {% endif %}
+
+    <br>
+    <a href="/request_blood">Make another request</a> |
+    <a href="/">Home</a>
+</body>
+</html>

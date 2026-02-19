@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donor Dashboard</title>
+</head>
+<body>
+    <h2>Welcome Donor</h2>
+
+    <p>Hello, {{ session['name'] }}</p>
+
+    <h3>Update Your Donor Details</h3>
+
+    <form method="POST">
+        <label>Blood Group:</label><br>
+        <input type="text" name="blood_group" value="{{ donor.blood_group if donor else '' }}" required><br><br>
+
+        <label>City:</label><br>
+        <input type="text" name="city" value="{{ donor.city if donor else '' }}" required><br><br>
+
+        <label>Phone:</label><br>
+        <input type="text" name="phone" value="{{ donor.phone if donor else '' }}" required><br><br>
+
+        <label>Last Donation Date:</label><br>
+        <input type="date" name="last_donation" value="{{ donor.last_donation if donor else '' }}" required><br><br>
+
+        <label>Available:</label>
+        <input type="checkbox" name="available" {% if donor and donor.available %}checked{% endif %}>
+        <br><br>
+
+        <button type="submit">Save</button>
+    </form>
+
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
