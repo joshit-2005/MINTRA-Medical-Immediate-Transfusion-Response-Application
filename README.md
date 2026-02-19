@@ -1,2 +1,2 @@
-# MINTRA-MEdical-Immediate-Transfusion-Response-Application
+# MINTRA-Medical-Immediate-Transfusion-Response-Application
 Emergency Blood and Donour Availability System
