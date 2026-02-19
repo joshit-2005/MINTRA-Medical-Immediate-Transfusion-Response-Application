@@ -147,6 +147,59 @@ def donors_list():
 
     return render_template("donors_list.html", donors=donors, city=city, blood_group=blood_group)
 
+@app.route("/donor_requests")
+def donor_requests():
+    if "user_id" not in session or session["role"] != "donor":
+        return redirect("/login")
+
+    user_id = session["user_id"]
+
+    conn = get_db_connection()
+    cur = conn.cursor(dictionary=True)
+
+    # Get donor city
+    cur.execute("SELECT city FROM donors WHERE user_id=%s", (user_id,))
+    donor = cur.fetchone()
+
+    if not donor:
+        cur.close()
+        conn.close()
+        return "Update your donor profile first."
+
+    city = donor["city"]
+
+    # Get requests from same city
+    cur.execute("SELECT * FROM requests WHERE city=%s ORDER BY created_at DESC", (city,))
+    requests_list = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return render_template("donor_requests.html", requests_list=requests_list, city=city)
+
+@app.route("/search_donors", methods=["GET", "POST"])
+def search_donors():
+    donors = []
+    city = ""
+    blood_group = ""
+
+    if request.method == "POST":
+        city = request.form["city"]
+        blood_group = request.form["blood_group"]
+
+        conn = get_db_connection()
+        cur = conn.cursor(dictionary=True)
+
+        cur.execute("""
+            SELECT * FROM donors
+            WHERE city=%s AND blood_group=%s AND available=TRUE
+        """, (city, blood_group))
+
+        donors = cur.fetchall()
+        cur.close()
+        conn.close()
+
+    return render_template("search_donors.html", donors=donors, city=city, blood_group=blood_group)
 
 @app.route("/logout")
 def logout():

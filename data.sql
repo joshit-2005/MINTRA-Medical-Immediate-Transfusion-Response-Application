@@ -33,3 +33,12 @@ CREATE TABLE requests (
 
 ALTER TABLE donors 
 MODIFY blood_group VARCHAR(5);
+
+SELECT *
+FROM users
+
+SELECT *
+FROM requests 
+
+SELECT *
+FROM users

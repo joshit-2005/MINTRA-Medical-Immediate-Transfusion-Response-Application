@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Donors</title>
+</head>
+<body>
+    <h2>Search Blood Donors</h2>
+
+    <form method="POST">
+        <label>City:</label><br>
+        <input type="text" name="city" required><br><br>
+
+        <label>Blood Group:</label><br>
+        <input type="text" name="blood_group" required><br><br>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <br>
+
+    {% if donors %}
+        <h3>Available Donors</h3>
+        <ul>
+            {% for d in donors %}
+                <li>
+                    <b>Blood Group:</b> {{ d.blood_group }} |
+                    <b>City:</b> {{ d.city }} |
+                    <b>Phone:</b> {{ d.phone }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif city %}
+        <p>No donors found.</p>
+    {% endif %}
+
+    <br>
+    <a href="/">Home</a>
+</body>
+</html>

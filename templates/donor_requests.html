@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emergency Requests</title>
+</head>
+<body>
+    <h2>Emergency Requests in {{ city }}</h2>
+
+    {% if requests_list %}
+        <ul>
+            {% for r in requests_list %}
+                <li>
+                    <b>Name:</b> {{ r.receiver_name }} <br>
+                    <b>Blood Group:</b> {{ r.blood_group }} <br>
+                    <b>Units:</b> {{ r.units }} <br>
+                    <b>Hospital:</b> {{ r.hospital }} <br>
+                    <b>Phone:</b> {{ r.phone }} <br>
+                    <b>Time:</b> {{ r.created_at }} <br>
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No emergency requests in your city right now.</p>
+    {% endif %}
+
+    <br>
+    <a href="/donor_dashboard">Back</a>
+</body>
+</html>
