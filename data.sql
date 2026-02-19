@@ -30,3 +30,6 @@ CREATE TABLE requests (
     phone VARCHAR(15),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE donors 
+MODIFY blood_group VARCHAR(5);
